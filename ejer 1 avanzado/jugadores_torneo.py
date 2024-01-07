@@ -1,5 +1,3 @@
-# jugadores_torneo.py
-
 jugadores = {}
 
 def validar_edad(categoria, edad):

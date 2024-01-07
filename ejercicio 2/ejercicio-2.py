@@ -1,4 +1,3 @@
-
 nombre = input("Ingrese el nombre del estudiante: ")
 edad = int(input("Ingrese la edad del estudiante: "))
 peso = float(input("Ingrese el peso del estudiante en Kg: "))

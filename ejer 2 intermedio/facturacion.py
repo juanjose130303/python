@@ -1,5 +1,3 @@
-# facturacion.py
-
 def obtener_float_input(mensaje):
     while True:
         try:

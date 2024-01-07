@@ -1,4 +1,3 @@
-# main.py
 from gestion_productos import (
     registrar_producto,
     visualizar_productos,

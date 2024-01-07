@@ -1,5 +1,3 @@
-# validaciones.py
-
 def obtener_numero_entero(mensaje):
     while True:
         try:

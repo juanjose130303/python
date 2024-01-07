@@ -1,5 +1,3 @@
-# main.py
-
 from jugadores_torneo import registrar_jugador, mostrar_registro
 from juegos_torneo import registrar_partido
 from torneo_torneo import conocer_ganador

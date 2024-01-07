@@ -1,4 +1,3 @@
-# main.py
 from facturacion import (
     obtener_consumos_por_dependencia,
     obtener_factor_emision_energia,

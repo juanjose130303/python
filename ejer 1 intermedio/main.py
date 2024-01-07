@@ -1,4 +1,3 @@
-# main.py
 from registro_sismos import registrar_ciudad, registrar_sismo, buscar_sismos, informe_riesgo
 
 def mostrar_menu():

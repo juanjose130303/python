@@ -1,4 +1,3 @@
-
 total_numeros = 0
 total_pares = 0
 suma_pares = 0

@@ -1,5 +1,3 @@
-# juegos_torneo.py
-
 from jugadores_torneo import jugadores, actualizar_estadisticas_partido, obtener_ganador_por_categoria
 
 def registrar_partido(id_jugador1, id_jugador2, resultado_jugador1, resultado_jugador2):
@@ -7,7 +5,6 @@ def registrar_partido(id_jugador1, id_jugador2, resultado_jugador1, resultado_ju
         print("\nError: Jugador(es) no encontrado(s).")
         return
 
-    # Actualizar estadísticas de los jugadores
     actualizar_estadisticas_partido(id_jugador1, resultado_jugador1)
     actualizar_estadisticas_partido(id_jugador2, resultado_jugador2)
 

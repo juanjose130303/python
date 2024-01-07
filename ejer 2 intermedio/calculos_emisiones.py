@@ -1,5 +1,3 @@
-# calculos_emisiones.py
-
 def calcular_emisiones_electricidad(consumo_electricidad, factor_emision_electricidad):
     return consumo_electricidad * factor_emision_electricidad
 

@@ -1,5 +1,3 @@
-# torneo_torneo.py
-
 from jugadores_torneo import jugadores
 
 def iniciar_torneo():

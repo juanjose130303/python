@@ -1,5 +1,3 @@
-# registro_sismos.py
-
 def registrar_ciudad(ciudades):
     ciudad = input("Ingrese el nombre de la ciudad: ")
     ciudades.append({'ciudad': ciudad, 'sismos': []})

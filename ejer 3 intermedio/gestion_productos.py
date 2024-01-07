@@ -1,5 +1,3 @@
-# gestion_productos.py
-
 productos = []
 
 def registrar_producto(codigo, nombre, valor_compra, valor_venta, stock_minimo, stock_maximo, proveedor):
