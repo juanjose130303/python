@@ -4,12 +4,15 @@ from ruta_entrenamiento import RutaEntrenamiento
 from entrenador import Entrenador
 from matricula import Matricula
 
+
 def menu_principal():
     print("1. Registrar nuevo Camper")
     print("2. Registrar nota de prueba")
     print("3. Gestionar matrícula")
     print("4. Consultar información")
-    print("5. Guardar y salir")
+    print("5. Inscribir nuevo Entrenador")
+    print("6. Asignar ruta a último Entrenador")
+    print("7. Guardar y salir")
 
 def registrar_camper(campers):
     print("Registro de nuevo Camper:")
@@ -25,7 +28,7 @@ def registrar_camper(campers):
     campers.append(nuevo_camper)
     print("Camper registrado exitosamente.")
 
-def registrar_nota_prueba(campers):
+def registrar_nota_prueba(campers, rutas, areas_entrenamiento):
     print("Registro de nota de prueba:")
     nro_identificacion = input("Número de identificación del Camper: ")
     camper = Gestion.buscar_camper_por_identificacion(campers, nro_identificacion)
@@ -35,11 +38,20 @@ def registrar_nota_prueba(campers):
         quices = Gestion.input_float("Ingrese la nota de quices: ")
         trabajos = Gestion.input_float("Ingrese la nota de trabajos: ")
         Gestion.asignar_notas(camper, nota_teorica, nota_practica, quices, trabajos)
+
+        # Asigna el camper a una ruta
+        for ruta in rutas:
+            if Gestion.asignar_camper_a_ruta(camper, ruta, areas_entrenamiento):
+                print(f"Camper asignado a la ruta {ruta.nombre} exitosamente.")
+                break
+        else:
+            print("No se pudo asignar el Camper a ninguna ruta disponible.")
+
         print("Notas registradas exitosamente.")
     else:
         print("Camper no encontrado o no está inscrito.")
 
-def gestionar_matricula(campers, rutas, entrenadores):
+def gestionar_matricula(campers, rutas, entrenadores, areas_entrenamiento):
     print("Gestión de matrícula:")
     nro_identificacion = input("Número de identificación del Camper: ")
     camper = Gestion.buscar_camper_por_identificacion(campers, nro_identificacion)
@@ -54,17 +66,28 @@ def gestionar_matricula(campers, rutas, entrenadores):
             id_entrenador = input("ID del entrenador seleccionado: ")
             entrenador = Gestion.buscar_entrenador_por_id(entrenadores, id_entrenador)
             if entrenador:
-                fecha_inicio = input("Fecha de inicio de la matrícula: ")
-                fecha_fin = input("Fecha de finalización de la matrícula: ")
-                salon_entrenamiento = input("Salón de entrenamiento: ")
-                matricula = Gestion.gestionar_matricula(camper, ruta, entrenador, fecha_inicio, fecha_fin, salon_entrenamiento)
-                print("Matrícula gestionada exitosamente.")
+                print("Seleccione el área de entrenamiento:")
+                print("1. Sputnik")
+                print("2. Artemis")
+                print("3. Apolo")
+                area_opcion = Gestion.input_numero("Seleccione el área de entrenamiento: ")
+                area_entrenamiento = f"Area {area_opcion}"
+                if ruta.asignar_camper_a_area(area_entrenamiento):
+                    fecha_inicio = input("Fecha de inicio de la matrícula: ")
+                    fecha_fin = input("Fecha de finalización de la matrícula: ")
+                    salon_entrenamiento = input("Salón de entrenamiento: ")
+                    matricula = Gestion.gestionar_matricula(camper, ruta, entrenador, fecha_inicio, fecha_fin, salon_entrenamiento, area_entrenamiento)
+                    print("Matrícula gestionada exitosamente.")
+                else:
+                    print(f"No hay capacidad disponible en el área de entrenamiento {area_entrenamiento}.")
             else:
                 print("Entrenador no encontrado.")
         else:
             print("Ruta no encontrada o sin capacidad disponible.")
     else:
         print("Camper no encontrado o no aprobado.")
+
+
 
 def consultar_informacion(campers, rutas, entrenadores):
     print("Consulta de información:")
@@ -105,8 +128,8 @@ def consultar_informacion(campers, rutas, entrenadores):
     else:
         print("Opción no válida.")
 
-def main():
-    campers, rutas, entrenadores = Gestion.cargar_datos()
+if __name__ == "__main__":
+    campers, rutas, entrenadores, areas_entrenamiento = Gestion.cargar_datos()
 
     while True:
         menu_principal()
@@ -115,17 +138,25 @@ def main():
         if opcion == 1:
             registrar_camper(campers)
         elif opcion == 2:
-            registrar_nota_prueba(campers)
+            registrar_nota_prueba(campers, rutas, areas_entrenamiento)
         elif opcion == 3:
-            gestionar_matricula(campers, rutas, entrenadores)
+            gestionar_matricula(campers, rutas, entrenadores, areas_entrenamiento)
         elif opcion == 4:
             consultar_informacion(campers, rutas, entrenadores)
         elif opcion == 5:
-            Gestion.guardar_datos(campers, rutas, entrenadores)
+            Gestion.inscribir_entrenador(entrenadores)
+        elif opcion == 6:
+            Gestion.asignar_ruta_a_entrenador(entrenadores[-1], rutas)
+        elif opcion == 7:
+            Gestion.guardar_datos(campers, rutas, entrenadores, areas_entrenamiento)
             print("Datos guardados exitosamente. Saliendo del programa.")
             break
         else:
             print("Opción no válida. Por favor, seleccione una opción válida.")
 
+
 if __name__ == "__main__":
-    main()
+    
+    Gestion.main()
+    
+
